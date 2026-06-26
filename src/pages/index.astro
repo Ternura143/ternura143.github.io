@@ -25,11 +25,29 @@ const news = [
   <MetaPage slot="head" />
 
   <section class="home-hero" aria-labelledby="home-title">
-    <div class="home-hero-copy">
+    <div class="home-hero-intro">
       <p class="page-kicker" data-time-greeting>Hello</p>
       <h1 id="home-title"><em data-decode="Zixuan Zhu">Zixuan Zhu</em></h1>
       <p class="home-role">MSc student @ NTU.</p>
-      <div class="home-about">
+    </div>
+    <div class="home-hero-aside">
+      <figure class="profile-photo">
+        <img src="/static/profile.png" alt="Zixuan Zhu">
+      </figure>
+      <div class="social-links" aria-label="Social links">
+        {SOCIALS.map((social) => (
+          <a
+            href={social.href}
+            target={social.href.startsWith("http") ? "_blank" : undefined}
+            rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+          >
+            {social.label}
+            {social.href.startsWith("http") && <span class="arrow"> ↗</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+    <div class="home-about">
         <p>
           I am Zixuan Zhu, an MSc student at the School of Physical and Mathematical
           Sciences, Nanyang Technological University (NTU), graduating in 2026. I
@@ -84,24 +102,6 @@ const news = [
             rel="noopener noreferrer">Senkang Hu</a
           > on self-evolving agents.
         </p>
-      </div>
-    </div>
-    <div class="home-hero-aside">
-      <figure class="profile-photo">
-        <img src="/static/profile.png" alt="Zixuan Zhu">
-      </figure>
-      <div class="social-links" aria-label="Social links">
-        {SOCIALS.map((social) => (
-          <a
-            href={social.href}
-            target={social.href.startsWith("http") ? "_blank" : undefined}
-            rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-          >
-            {social.label}
-            {social.href.startsWith("http") && <span class="arrow"> ↗</span>}
-          </a>
-        ))}
-      </div>
     </div>
   </section>
 
@@ -232,9 +232,20 @@ const news = [
   .home-hero {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "intro aside"
+      "about aside";
     gap: var(--space-l);
     align-items: start;
     padding-block: var(--space-l) var(--space-xl);
+  }
+
+  .home-hero-intro {
+    grid-area: intro;
+  }
+
+  .home-about {
+    grid-area: about;
   }
 
   .home-hero h1 {
@@ -291,6 +302,7 @@ const news = [
   }
 
   .home-hero-aside {
+    grid-area: aside;
     display: flex;
     flex-direction: column;
     gap: var(--space-s);
@@ -342,6 +354,22 @@ const news = [
   @media (width < 40rem) {
     .home-hero {
       grid-template-columns: 1fr;
+      grid-template-areas:
+        "intro"
+        "aside"
+        "about";
+      gap: var(--space-m);
+    }
+
+    .home-hero-aside {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-m);
+    }
+
+    .home-hero-aside .social-links {
+      flex: 1 1 10rem;
     }
 
     .profile-photo {
