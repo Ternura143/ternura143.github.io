@@ -1,0 +1,35 @@
+---
+import BlogCard from "@/components/BlogCard.astro"
+import MetaPage from "@/components/MetaPage.astro"
+import Layout from "@/layouts/Layout.astro"
+import { getPosts } from "@/lib/content"
+
+const posts = await getPosts()
+---
+
+<Layout crumbs={[{ label: "Blog", href: "/blog" }]}>
+  <MetaPage slot="head" title="Blog" />
+
+  <p class="page-kicker">Blog</p>
+  <h1 class="page-title">Notes, later</h1>
+  <p class="page-intro">
+    The blog route is reserved for future writing. There are no posts published
+    yet.
+  </p>
+
+  {posts.length > 0 ? (
+    <ul>
+      {posts.map((post) => <BlogCard post={post} />)}
+    </ul>
+  ) : (
+    <p class="empty-state">No posts yet.</p>
+  )}
+</Layout>
+
+<style>
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+</style>

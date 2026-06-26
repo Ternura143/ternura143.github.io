@@ -1,0 +1,21 @@
+dist/
+.astro/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.env
+.env.production
+.DS_Store
+.idea/
+
+# LaTeX build artifacts (CV source is cv/cv.tex; the served PDF is public/cv.pdf)
+cv/*.aux
+cv/*.fdb_latexmk
+cv/*.fls
+cv/*.log
+cv/*.out
+cv/*.synctex.gz
+cv/build.log
+cv/cv.pdf

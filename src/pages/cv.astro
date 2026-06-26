@@ -1,0 +1,41 @@
+---
+import MetaPage from "@/components/MetaPage.astro"
+import Layout from "@/layouts/Layout.astro"
+---
+
+<Layout>
+  <MetaPage slot="head" title="CV" />
+
+  <section class="site-section" aria-labelledby="cv-label">
+    <div class="section-label" id="cv-label">
+      <span>CV</span>
+    </div>
+    <p class="cv-intro">
+      You can view or download my CV <a
+        href="/cv.pdf"
+        target="_blank"
+        rel="noopener noreferrer">here</a
+      >.
+    </p>
+    <iframe class="cv-frame" src="/cv.pdf" title="Zixuan Zhu — CV"></iframe>
+  </section>
+</Layout>
+
+<style>
+  .cv-intro {
+    margin-block: 0 var(--space-s);
+    color: var(--muted-foreground);
+  }
+
+  .cv-intro a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .cv-frame {
+    inline-size: 100%;
+    block-size: 85vh;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+  }
+</style>

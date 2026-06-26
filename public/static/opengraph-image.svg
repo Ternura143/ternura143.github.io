@@ -1,0 +1,83 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1200"
+  height="630"
+  viewBox="0 0 1200 630"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">ternura</title>
+  <desc id="desc">Ink-on-paper social preview for the personal website.</desc>
+  <rect width="1200" height="630" fill="#f4f1ec" />
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" />
+    <feColorMatrix type="saturate" values="0" />
+    <feComponentTransfer>
+      <feFuncA type="table" tableValues="0 0.08" />
+    </feComponentTransfer>
+  </filter>
+  <rect width="1200" height="630" filter="url(#grain)" opacity="0.34" />
+  <path
+    d="M96 126H1104"
+    stroke="#d7d1c7"
+    stroke-width="2"
+    stroke-dasharray="10 12"
+  />
+  <path
+    d="M96 504H1104"
+    stroke="#d7d1c7"
+    stroke-width="2"
+    stroke-dasharray="10 12"
+  />
+  <rect
+    x="96"
+    y="190"
+    width="118"
+    height="118"
+    fill="none"
+    stroke="#6c5c8a"
+    stroke-width="5"
+    rx="8"
+    transform="rotate(-4 155 249)"
+  />
+  <text
+    x="155"
+    y="269"
+    text-anchor="middle"
+    font-family="IBM Plex Mono, ui-monospace, monospace"
+    font-size="72"
+    font-weight="500"
+    fill="#6c5c8a"
+  >
+    T
+  </text>
+  <text
+    x="264"
+    y="238"
+    font-family="IBM Plex Mono, ui-monospace, monospace"
+    font-size="32"
+    font-weight="500"
+    fill="#6c5c8a"
+  >
+    ternura
+  </text>
+  <text
+    x="264"
+    y="322"
+    font-family="IBM Plex Mono, ui-monospace, monospace"
+    font-size="64"
+    font-weight="500"
+    fill="#211e29"
+  >
+    [Your Name]
+  </text>
+  <text
+    x="264"
+    y="382"
+    font-family="IBM Plex Sans, system-ui, sans-serif"
+    font-size="30"
+    fill="#5b5566"
+  >
+    student researcher · [research area]
+  </text>
+</svg>

@@ -1,0 +1,38 @@
+---
+import { SITE } from "@/consts"
+---
+
+<footer>
+  <p>
+    &copy; {new Date().getFullYear()} {SITE.title}. All rights reserved. Built on the
+    beautiful <a
+      href="https://github.com/jktrn/astro-erudite"
+      target="_blank"
+      rel="noopener noreferrer">astro-erudite</a
+    > project.
+  </p>
+</footer>
+
+<style>
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    align-items: center;
+    justify-content: space-between;
+    margin-block: var(--space-xs) var(--page-offset-bottom);
+    padding-block-start: var(--space-s);
+    border-block-start: 1px dashed var(--rule);
+    font-family: var(--font-mono);
+
+    p {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    p a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  }
+</style>

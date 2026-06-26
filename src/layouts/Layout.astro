@@ -1,0 +1,469 @@
+---
+import "@/styles/reset.css"
+import "@/styles/fonts.css"
+import "@/styles/color.css"
+import "@/styles/typography.css"
+import "@/styles/typography-headings.css"
+import "@/styles/typography-inline.css"
+import "@/styles/typography-lists.css"
+import "@/styles/typography-block.css"
+import "@/styles/typography-tables.css"
+import "@/styles/callout.css"
+import "@/styles/layout.css"
+import "@/styles/icon-button.css"
+import "@/styles/bar.css"
+import "@/styles/shape.css"
+import "@/styles/personal.css"
+
+import Footer from "@/components/Footer.astro"
+import MetaHead from "@/components/MetaHead.astro"
+import ThemeToggle from "@/components/ThemeToggle.astro"
+import { NAVIGATION, SITE } from "@/consts"
+import { ClientRouter } from "astro:transitions"
+---
+
+<html lang={SITE.locale} dir={SITE.dir}>
+  <MetaHead>
+    <ClientRouter />
+    <slot name="head" />
+  </MetaHead>
+  <body>
+    <div id="ink-progress" aria-hidden="true"></div>
+    <div id="ink-spot" aria-hidden="true"></div>
+    <div id="ink-toast" role="status" aria-live="polite"></div>
+    <page-grid>
+      <page-header>
+        <a class="site-mark" href="/" aria-label={SITE.title}>
+          <brand-glyph>T</brand-glyph>
+          <span>{SITE.title}</span>
+        </a>
+        <nav aria-label="Primary">
+          {NAVIGATION.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))}
+        </nav>
+        <div class="site-actions">
+          <ThemeToggle />
+        </div>
+      </page-header>
+      <page-content>
+        <main><slot /></main>
+        <page-footer><Footer /></page-footer>
+      </page-content>
+    </page-grid>
+    <script>
+      const prefersReducedMotion = () =>
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+      const getTheme = () => {
+        const root = document.documentElement
+        if (root.dataset.theme === "light" || root.dataset.theme === "dark") {
+          return root.dataset.theme
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+      }
+
+      const drawFavicon = () => {
+        const dark = getTheme() === "dark"
+        const canvas = document.createElement("canvas")
+        const size = 64
+        canvas.width = size
+        canvas.height = size
+        const ctx = canvas.getContext("2d")
+        if (!ctx) return
+
+        const bg = dark ? "#15131a" : "#f4f1ec"
+        const fg = dark ? "#b4a4d6" : "#6c5c8a"
+        ctx.fillStyle = bg
+        ctx.fillRect(0, 0, size, size)
+        ctx.strokeStyle = fg
+        ctx.lineWidth = 5
+        ctx.strokeRect(11, 11, 42, 42)
+        ctx.fillStyle = fg
+        ctx.font = "500 34px IBM Plex Mono, monospace"
+        ctx.textAlign = "center"
+        ctx.textBaseline = "middle"
+        ctx.fillText("T", 32, 35)
+
+        let link = document.querySelector<HTMLLinkElement>(
+          "link[data-dynamic-favicon]",
+        )
+        if (!link) {
+          link = document.createElement("link")
+          link.rel = "icon"
+          link.dataset.dynamicFavicon = "true"
+          document.head.append(link)
+        }
+        link.href = canvas.toDataURL("image/png")
+      }
+
+      const showToast = (message: string) => {
+        const toast = document.getElementById("ink-toast")
+        if (!toast) return
+        toast.textContent = message
+        toast.classList.add("is-visible")
+        window.clearTimeout(Number(toast.dataset.timeout))
+        const timeout = window.setTimeout(() => {
+          toast.classList.remove("is-visible")
+        }, 1800)
+        toast.dataset.timeout = String(timeout)
+      }
+
+      const bindThemeToggle = () => {
+        const root = document.documentElement
+        for (const button of document.querySelectorAll<HTMLElement>(
+          "[data-theme-toggle]",
+        )) {
+          button.onclick = () => {
+            const nextTheme = getTheme() === "dark" ? "light" : "dark"
+            const apply = () => {
+              root.dataset.theme = nextTheme
+              localStorage.theme = nextTheme
+              drawFavicon()
+            }
+
+            if ("startViewTransition" in document && !prefersReducedMotion()) {
+              document.startViewTransition(apply)
+            } else {
+              apply()
+            }
+          }
+        }
+      }
+
+      const bindCopyEmail = () => {
+        for (const link of document.querySelectorAll<HTMLElement>(
+          "[data-copy-email]",
+        )) {
+          link.onclick = async (event) => {
+            event.preventDefault()
+            const email = link.dataset.copyEmail ?? "zzx18742002@gmail.com"
+            try {
+              await navigator.clipboard?.writeText(email)
+              showToast(`Email copied: ${email}`)
+            } catch {
+              showToast(email)
+            }
+          }
+        }
+      }
+
+      const setGreeting = () => {
+        const hour = new Date().getHours()
+        let greeting = "Hello"
+        if (hour < 5) greeting = "Still up?"
+        else if (hour < 12) greeting = "Good morning"
+        else if (hour < 18) greeting = "Good afternoon"
+        else greeting = "Good evening"
+
+        for (const el of document.querySelectorAll("[data-time-greeting]")) {
+          el.textContent = greeting
+        }
+      }
+
+      const decodeTaglines = () => {
+        if (prefersReducedMotion()) return
+        const chars = "abcdefghijklmnopqrstuvwxyz_/<>"
+        for (const el of document.querySelectorAll<HTMLElement>(
+          "[data-decode]",
+        )) {
+          if (el.dataset.decoded === "true") continue
+          el.dataset.decoded = "true"
+          const finalText = el.dataset.decode || el.textContent || ""
+          let frame = 0
+          const timer = window.setInterval(() => {
+            let output = ""
+            for (let i = 0; i < finalText.length; i++) {
+              if (i < frame / 2 || finalText[i] === " ") {
+                output += finalText[i]
+              } else {
+                output += chars[(Math.random() * chars.length) | 0]
+              }
+            }
+            el.textContent = output
+            frame += 1
+            if (frame / 2 > finalText.length) {
+              window.clearInterval(timer)
+              el.textContent = finalText
+            }
+          }, 40)
+        }
+      }
+
+      const bindDrawRules = () => {
+        const sections = document.querySelectorAll<HTMLElement>(".site-section")
+        if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
+          for (const section of sections) section.classList.add("is-drawn")
+          return
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue
+              entry.target.classList.add("is-drawn")
+              observer.unobserve(entry.target)
+            }
+          },
+          { threshold: 0.1 },
+        )
+        for (const section of sections) observer.observe(section)
+      }
+
+      const setScrollProgress = () => {
+        const progress = document.getElementById("ink-progress")
+        if (!progress) return
+        const root = document.documentElement
+        const distance = root.scrollHeight - root.clientHeight
+        const width = distance > 0 ? (root.scrollTop / distance) * 100 : 0
+        progress.style.width = `${width}%`
+      }
+
+      const normalizeHeatDays = (data: any) => {
+        const raw =
+          data?.contributions ??
+          data?.calendar?.weeks?.flatMap(
+            (week: any) => week.contributionDays,
+          ) ??
+          data?.data?.user?.contributionsCollection?.contributionCalendar?.weeks?.flatMap(
+            (week: any) => week.contributionDays,
+          ) ??
+          []
+
+        const days = Array.isArray(raw)
+          ? raw.flatMap((item) =>
+              Array.isArray(item?.days) ? item.days : item,
+            )
+          : []
+
+        return days
+          .map((day: any) => ({
+            date: day.date,
+            count: Number(day.count ?? day.contributionCount ?? 0),
+            level:
+              day.level === undefined
+                ? undefined
+                : Math.max(0, Math.min(4, Number(day.level))),
+          }))
+          .filter((day) => day.date)
+          .slice(-371)
+      }
+
+      const renderHeatmap = (
+        container: HTMLElement,
+        days: { date: string; count: number; level?: number }[],
+      ) => {
+        container.replaceChildren()
+        const maxCount = Math.max(1, ...days.map((day) => day.count))
+        for (const day of days) {
+          const level =
+            day.level ??
+            (day.count === 0
+              ? 0
+              : Math.min(4, Math.max(1, Math.ceil((day.count / maxCount) * 4))))
+          const cell = document.createElement("i")
+          cell.className = "heatmap-cell"
+          cell.dataset.level = String(level)
+          cell.title = `${day.count} contributions on ${day.date}`
+          cell.setAttribute("aria-label", cell.title)
+          container.append(cell)
+        }
+      }
+
+      const loadHeatmaps = async () => {
+        for (const container of document.querySelectorAll<HTMLElement>(
+          "[data-github-heatmap]",
+        )) {
+          if (container.dataset.loaded === "true") continue
+          container.dataset.loaded = "true"
+          const username = container.dataset.githubUser
+          if (!username) continue
+          const endpoint =
+            container.dataset.githubEndpoint ||
+            `https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(
+              username,
+            )}?y=last`
+          try {
+            const response = await fetch(endpoint, {
+              headers: { accept: "application/json" },
+            })
+            if (!response.ok)
+              throw new Error("GitHub contribution fetch failed")
+            const days = normalizeHeatDays(await response.json())
+            if (!days.length)
+              throw new Error("GitHub contribution data was empty")
+            renderHeatmap(container, days)
+          } catch {
+            container.replaceChildren()
+            const message = document.createElement("p")
+            message.className = "heatmap-message"
+            message.textContent = "GitHub contribution data is unavailable."
+            container.append(message)
+          }
+        }
+      }
+
+      const initPersonalSite = () => {
+        setGreeting()
+        decodeTaglines()
+        bindDrawRules()
+        bindThemeToggle()
+        bindCopyEmail()
+        drawFavicon()
+        setScrollProgress()
+        void loadHeatmaps()
+      }
+
+      if (!window.__personalSiteBound) {
+        window.__personalSiteBound = true
+        window.addEventListener(
+          "pointermove",
+          (event) => {
+            if (prefersReducedMotion()) return
+            const root = document.documentElement
+            root.style.setProperty("--spot-x", `${event.clientX}px`)
+            root.style.setProperty("--spot-y", `${event.clientY}px`)
+          },
+          { passive: true },
+        )
+        window.addEventListener("scroll", setScrollProgress, { passive: true })
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", drawFavicon)
+        document.addEventListener("astro:page-load", initPersonalSite)
+        document.addEventListener("astro:after-swap", () => {
+          const stored = localStorage.theme
+          document.documentElement.dataset.theme =
+            stored === "dark" ? "dark" : "light"
+        })
+      }
+
+      initPersonalSite()
+    </script>
+  </body>
+</html>
+
+<style>
+  page-grid {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    inline-size: min(100% - 2 * var(--grid-gutter), var(--measure));
+    min-height: 100svh;
+    margin-inline: auto;
+    padding-block-start: var(--space-l);
+  }
+
+  page-header {
+    position: relative;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: var(--space-s);
+    align-items: center;
+    padding-block: var(--space-xs) var(--space-l);
+
+    .site-mark {
+      display: inline-flex;
+      gap: 0.6rem;
+      align-items: center;
+      inline-size: fit-content;
+      color: var(--foreground);
+      font-family: var(--font-mono);
+      font-size: var(--step--1);
+      font-weight: var(--font-weight-medium);
+      text-decoration-line: none;
+
+      brand-glyph {
+        display: grid;
+        place-items: center;
+        inline-size: 1.9rem;
+        block-size: 1.9rem;
+        color: var(--accent);
+        border: 1.5px solid var(--accent);
+        border-radius: var(--radius-md);
+        transform: rotate(0deg);
+        transition: transform 0.25s ease;
+        flex-shrink: 0;
+      }
+
+      &:hover brand-glyph {
+        transform: rotate(-4deg);
+      }
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      justify-content: flex-end;
+      min-inline-size: 0;
+      font-family: var(--font-mono);
+      font-size: var(--step--1);
+
+      a {
+        position: relative;
+        color: var(--muted-foreground);
+        text-decoration-line: none;
+        transition: color 0.2s ease;
+
+        &::after {
+          position: absolute;
+          inset-inline-start: 0;
+          inset-block-end: -0.2rem;
+          inline-size: 100%;
+          block-size: 1px;
+          content: "";
+          background: var(--accent);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.22s ease;
+        }
+
+        &:hover {
+          color: var(--foreground);
+        }
+
+        &:hover::after {
+          transform: scaleX(1);
+        }
+      }
+    }
+
+    .site-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    @media (width < 36rem) {
+      grid-template-columns: 1fr auto;
+      gap: var(--space-xs);
+
+      nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  page-content {
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    min-width: 0;
+
+    main {
+      flex: 1;
+    }
+
+    page-footer {
+      display: block;
+      margin-block-start: var(--space-xl);
+    }
+  }
+</style>

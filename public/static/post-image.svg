@@ -1,0 +1,61 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1200"
+  height="630"
+  viewBox="0 0 1200 630"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">ternura blog preview</title>
+  <desc id="desc">Ink-on-paper social preview for future notes.</desc>
+  <rect width="1200" height="630" fill="#15131a" />
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" />
+    <feColorMatrix type="saturate" values="0" />
+    <feComponentTransfer>
+      <feFuncA type="table" tableValues="0 0.1" />
+    </feComponentTransfer>
+  </filter>
+  <rect width="1200" height="630" filter="url(#grain)" opacity="0.5" />
+  <path
+    d="M96 126H1104"
+    stroke="#2c2838"
+    stroke-width="2"
+    stroke-dasharray="10 12"
+  />
+  <path
+    d="M96 504H1104"
+    stroke="#2c2838"
+    stroke-width="2"
+    stroke-dasharray="10 12"
+  />
+  <text
+    x="96"
+    y="238"
+    font-family="IBM Plex Mono, ui-monospace, monospace"
+    font-size="30"
+    font-weight="500"
+    fill="#b4a4d6"
+  >
+    ternura
+  </text>
+  <text
+    x="96"
+    y="322"
+    font-family="IBM Plex Mono, ui-monospace, monospace"
+    font-size="64"
+    font-weight="500"
+    fill="#e9e5f0"
+  >
+    Notes, later
+  </text>
+  <text
+    x="96"
+    y="382"
+    font-family="IBM Plex Sans, system-ui, sans-serif"
+    font-size="30"
+    fill="#a59db6"
+  >
+    future writing by [Your Name]
+  </text>
+</svg>
