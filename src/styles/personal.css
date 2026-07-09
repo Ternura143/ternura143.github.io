@@ -343,12 +343,26 @@ page-content main {
   color: var(--muted-foreground);
 }
 
+.heatmap-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.35rem var(--space-s);
+  margin-block-start: var(--space-2xs);
+}
+
+.heatmap-total {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
 .heatmap-legend {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 0.35rem;
-  margin-block-start: var(--space-2xs);
   color: var(--muted-foreground);
   font-size: 0.78rem;
 }

@@ -152,11 +152,11 @@ import { ClientRouter } from "astro:transitions"
 
       const setGreeting = () => {
         const hour = new Date().getHours()
-        let greeting = "Hello"
-        if (hour < 5) greeting = "Still up?"
-        else if (hour < 12) greeting = "Good morning"
-        else if (hour < 18) greeting = "Good afternoon"
-        else greeting = "Good evening"
+        let greeting = "Hello! I'm"
+        if (hour < 5) greeting = "Still up? I'm"
+        else if (hour < 12) greeting = "Good morning! I'm"
+        else if (hour < 18) greeting = "Good afternoon! I'm"
+        else greeting = "Good evening! I'm"
 
         for (const el of document.querySelectorAll("[data-time-greeting]")) {
           el.textContent = greeting
@@ -295,6 +295,10 @@ import { ClientRouter } from "astro:transitions"
             if (!days.length)
               throw new Error("GitHub contribution data was empty")
             renderHeatmap(container, days)
+            const total = days.reduce((sum, day) => sum + day.count, 0)
+            const totalEl = document.querySelector("[data-github-total]")
+            if (totalEl)
+              totalEl.textContent = `${total.toLocaleString()} contributions in the last year`
           } catch {
             container.replaceChildren()
             const message = document.createElement("p")

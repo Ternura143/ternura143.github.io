@@ -4,6 +4,15 @@ import Layout from "@/layouts/Layout.astro"
 import { GITHUB_USERNAME, SOCIALS } from "@/consts"
 import { getCollection } from "astro:content"
 
+const MONTHS = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+]
+const fmtMonth = (ym: string) => {
+  const [year, month] = ym.split("-")
+  return `${MONTHS[Number(month) - 1]} ${year}`
+}
+
 const publications = (await getCollection("publications")).sort(
   (a, b) => b.data.year - a.data.year,
 )
@@ -15,8 +24,31 @@ const projects = (await getCollection("projects")).sort(
 
 const news = [
   {
+    date: "2026-07",
+    prefix: "New blog post: ",
+    title: "Introducing Harbor-Index",
+    link: "https://harbor-index.org/",
+    suffix: ", a compact benchmark for agentic evaluation.",
+  },
+  {
     date: "2026-06",
-    text: 'New paper on arXiv: "Unified Context Evolution for LLM Agents".',
+    prefix: "New paper on arXiv: ",
+    title: "Unified Context Evolution for LLM Agents",
+    link: "https://arxiv.org/abs/2606.02304",
+    suffix: ".",
+  },
+]
+
+const posts = [
+  {
+    title: "Introducing Harbor-Index",
+    description:
+      "A compact, diverse, challenging, and high-quality benchmark for agentic evaluation.",
+    authors: ["Lin Shi", "Haowei Lin", "Zixuan Zhu", "Xiaoyue Zhou", "Xiang Li"],
+    date: "2026-07",
+    link: "https://harbor-index.org/",
+    dataset:
+      "https://hub.harborframework.com/datasets/harbor-index/harbor-index-1.0/latest",
   },
 ]
 ---
@@ -26,9 +58,15 @@ const news = [
 
   <section class="home-hero" aria-labelledby="home-title">
     <div class="home-hero-intro">
-      <p class="page-kicker" data-time-greeting>Hello</p>
+      <p class="page-kicker" data-time-greeting>Hello! I'm</p>
       <h1 id="home-title"><em data-decode="Zixuan Zhu">Zixuan Zhu</em></h1>
-      <p class="home-role">MSc student @ NTU.</p>
+      <p class="home-role">Currently a core maintainer of <a
+          href="https://www.harborframework.com/"
+          target="_blank"
+          rel="noopener noreferrer">Harbor</a>, building agent evaluations with the <a
+          href="https://www.tbench.ai/"
+          target="_blank"
+          rel="noopener noreferrer">Terminal-Bench team</a>.</p>
     </div>
     <div class="home-hero-aside">
       <figure class="profile-photo">
@@ -49,7 +87,7 @@ const news = [
     </div>
     <div class="home-about">
         <p>
-          I am Zixuan Zhu, an MSc student at the School of Physical and Mathematical
+          I am an MSc student at the School of Physical and Mathematical
           Sciences, Nanyang Technological University (NTU), graduating in 2026. I
           received my dual bachelor's degree from Beijing University of Posts and
           Telecommunications (BUPT) and Queen Mary University of London (QMUL).
@@ -72,7 +110,7 @@ const news = [
           <li>
             <strong>Scalable evaluation</strong>: how to scale agent evaluation
             efficiently and in parallel (<a
-              href="https://github.com/harbor-framework/harbor"
+              href="https://www.harborframework.com/"
               target="_blank"
               rel="noopener noreferrer">Harbor</a
             >), and keep it robust and trustworthy.
@@ -92,10 +130,18 @@ const news = [
             href="https://scholar.google.com/citations?user=dLwY-1YAAAAJ"
             target="_blank"
             rel="noopener noreferrer">Lin Shi</a
-          >, and <a
+          >, <a
             href="https://linhaowei1.github.io/"
             target="_blank"
             rel="noopener noreferrer">Haowei Lin</a
+          >, <a
+            href="https://crystalxyz.github.io/"
+            target="_blank"
+            rel="noopener noreferrer">Xiaoyue Zhou</a
+          >, and <a
+            href="https://kevinx.li/"
+            target="_blank"
+            rel="noopener noreferrer">Xiang Li</a
           > on agent benchmarking, and with <a
             href="https://dl-m9.github.io/"
             target="_blank"
@@ -112,8 +158,8 @@ const news = [
     <div class="news-list">
       {news.map((item) => (
         <div class="news-item">
-          <time datetime={item.date}>{item.date}</time>
-          <p>{item.text}</p>
+          <time datetime={item.date}>{fmtMonth(item.date)}</time>
+          <p>{item.prefix}"<a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}</a>"{item.suffix}</p>
         </div>
       ))}
     </div>
@@ -133,7 +179,7 @@ const news = [
           <h2>{publication.data.title}</h2>
           <div class="entry-meta">
             <span class="tag">{publication.data.venue}</span>
-            <span>{publication.data.year}</span>
+            <span>{publication.data.date ? fmtMonth(publication.data.date) : publication.data.year}</span>
             {publication.data.status && <span>{publication.data.status}</span>}
             <span>
               {publication.data.authors.map((author, index) => (
@@ -166,6 +212,41 @@ const news = [
               ) : (
                 <span>Code ({publication.data.code})</span>
               ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="site-section" id="blog" aria-labelledby="blog-label">
+    <div class="section-label" id="blog-label">
+      <span>Blog</span>
+    </div>
+    <div class="ink-list">
+      {posts.map((post) => (
+        <article class="ink-entry">
+          <h2>{post.title}</h2>
+          <div class="entry-meta">
+            <span>{fmtMonth(post.date)}</span>
+            <span>
+              {post.authors.map((author, index) => (
+                <Fragment>
+                  {index > 0 && ", "}
+                  {author === "Zixuan Zhu" ? <strong>{author}</strong> : author}
+                </Fragment>
+              ))}
+            </span>
+          </div>
+          <p class="entry-summary">{post.description}</p>
+          <div class="entry-links">
+            <a href={post.link} target="_blank" rel="noopener noreferrer">
+              Blog <span class="arrow">↗</span>
+            </a>
+            {post.dataset && (
+              <a href={post.dataset} target="_blank" rel="noopener noreferrer">
+                Dataset <span class="arrow">↗</span>
+              </a>
+            )}
           </div>
         </article>
       ))}
@@ -220,9 +301,12 @@ const news = [
         <p class="heatmap-message">Loading GitHub contribution data...</p>
       </div>
     </div>
-    <div class="heatmap-legend" aria-hidden="true">
-      less <i></i><i></i><i></i><i></i>
-      more
+    <div class="heatmap-footer">
+      <span class="heatmap-total" data-github-total></span>
+      <span class="heatmap-legend" aria-hidden="true">
+        less <i></i><i></i><i></i><i></i>
+        more
+      </span>
     </div>
   </section>
 
@@ -235,13 +319,18 @@ const news = [
     grid-template-areas:
       "intro aside"
       "about aside";
-    gap: var(--space-l);
+    column-gap: var(--space-l);
+    row-gap: var(--space-s);
     align-items: start;
-    padding-block: var(--space-l) var(--space-xl);
+    padding-block: var(--space-l) var(--space-m);
   }
 
   .home-hero-intro {
     grid-area: intro;
+  }
+
+  .home-hero-intro .page-kicker {
+    text-transform: uppercase;
   }
 
   .home-about {
@@ -262,14 +351,26 @@ const news = [
   }
 
   .home-role {
-    margin-block: 0 var(--space-m);
+    margin-block: var(--space-2xs) 0;
+    padding-inline-start: var(--space-s);
+    border-inline-start: 2px solid var(--accent-soft);
     font-family: var(--font-mono);
-    color: var(--muted-foreground);
+    color: color-mix(in srgb, var(--foreground) 58%, transparent);
+  }
+
+  .news-item a {
+    color: var(--accent);
+    text-decoration-line: underline;
+    text-decoration-color: currentColor;
+  }
+
+  .home-role a {
+    color: var(--accent);
   }
 
   .home-about {
     max-inline-size: 58ch;
-    margin-block: 0 var(--space-m);
+    margin-block: 0;
     color: var(--muted-foreground);
   }
 

@@ -17,6 +17,7 @@ export const SITE = {
 
 export const NAVIGATION = [
   { href: "/#publications", label: "Publications" },
+  { href: "/#blog", label: "Blog" },
   { href: "/#projects", label: "Projects" },
   { href: "/cv", label: "CV" },
 ]

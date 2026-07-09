@@ -10,6 +10,7 @@ authors:
   - "Yuzhi Zhao"
 venue: "arXiv"
 year: 2026
+date: "2026-06"
 status: "Under review"
 arxiv: "https://arxiv.org/abs/2606.02304"
 code: "coming soon"
