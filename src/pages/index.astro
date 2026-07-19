@@ -17,10 +17,12 @@ const publications = (await getCollection("publications")).sort(
   (a, b) => b.data.year - a.data.year,
 )
 
-const projects = (await getCollection("projects")).sort(
-  (a, b) =>
-    (b.data.startDate?.getTime() ?? 0) - (a.data.startDate?.getTime() ?? 0),
-)
+const projects = (await getCollection("projects")).sort((a, b) => {
+  const orderA = a.data.order ?? Infinity
+  const orderB = b.data.order ?? Infinity
+  if (orderA !== orderB) return orderA - orderB
+  return (b.data.startDate?.getTime() ?? 0) - (a.data.startDate?.getTime() ?? 0)
+})
 
 const news = [
   {

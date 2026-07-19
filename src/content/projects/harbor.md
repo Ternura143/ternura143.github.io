@@ -5,8 +5,6 @@ link: "https://github.com/harbor-framework/harbor"
 website: "https://www.harborframework.com/"
 role: "Core Maintainer"
 selected: true
-tags:
-  - "Agent evaluation"
-  - "RL environments"
+order: 1
 startDate: 2025-12-01
 ---

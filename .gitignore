@@ -10,6 +10,9 @@ pnpm-debug.log*
 .DS_Store
 .idea/
 
+# Local-only agent memory (never committed)
+AGENTS.md
+
 # LaTeX build artifacts (CV source is cv/cv.tex; the served PDF is public/cv.pdf)
 cv/*.aux
 cv/*.fdb_latexmk

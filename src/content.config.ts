@@ -48,6 +48,7 @@ const projects = defineCollection({
       website: z.url().optional(),
       role: z.string().optional(),
       status: z.string().optional(),
+      order: z.number().optional(),
       selected: z.boolean().optional(),
       tags: z.array(z.string()).optional(),
       image: image().optional(),

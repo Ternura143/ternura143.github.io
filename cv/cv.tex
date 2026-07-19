@@ -6,7 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{charter}
-\usepackage[a4paper,margin=1.7cm]{geometry}
+\usepackage[a4paper,margin=1.5cm]{geometry}
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{xcolor}
@@ -22,7 +22,7 @@
 % Section headings: uppercase, bold, with a full-width rule underneath
 \titleformat{\section}
   {\normalsize\bfseries}{}{0em}{\MakeUppercase}[{\titlerule[0.7pt]}]
-\titlespacing{\section}{0pt}{1.4ex}{0.8ex}
+\titlespacing{\section}{0pt}{1.0ex}{0.55ex}
 
 \setlist[itemize]{leftmargin=1.2em, itemsep=0.15ex, topsep=0.3ex, parsep=0pt}
 
@@ -34,7 +34,7 @@
 
 % Project entry: {name (with link)}{stars}{role}{description}
 \newcommand{\project}[4]{%
-  \textbf{#1}\hspace{0.5em}{\small\color{accent}#2}\hfill\textit{#3}\\#4\par\vspace{0.5ex}%
+  \textbf{#1}\hspace{0.5em}{\small\color{accent}#2}\hfill\textit{#3}\\#4\par\vspace{0.3ex}%
 }
 
 \begin{document}
@@ -77,22 +77,19 @@
 
 % ---------- Research Experience ----------
 \section{Research Experience}
-\cventry{Research Collaborator}{Dec.\ 2025 -- Present}
-  {Stanford University}{Remote}
+\cventry{Harbor-Index}{Dec.\ 2025 -- Present}
+  {Research Collaborator, Stanford University, advised by Prof.\ Ludwig Schmidt}{Remote}
 \begin{itemize}
-  \item Core maintainer for \textit{Harbor} and sub-team lead of token analysis.
-  \item Built benchmark adapters (e.g., the Berkeley Function-Calling Leaderboard, BFCL)
-        and agent integrations (Qwen Code, Kimi CLI); developed the review bot and led
-        adapter review and standardization.
+  \item Built a compact 82-task agentic benchmark distilled from 6,627 candidate tasks
+        across 54 benchmarks through difficulty filtering, automated auditing, and human review.
+  \item Led the token-analysis sub-team, studying agent failure modes and token efficiency
+        across frontier and open models.
 \end{itemize}
-\cventry{Research Assistant}{Sep.\ 2021 -- May.\ 2023}
-  {Lab of Software Intelligence \& Social Computing, BUPT}{Beijing, China}
+\cventry{CollabXplorer}{Sep.\ 2021 -- May.\ 2023}
+  {Research Assistant, BUPT, advised by Prof.\ Yi Wang}{Beijing, China}
 \begin{itemize}
-  \item Designed scholar embeddings and a PageRank-based matching method for
-        interdisciplinary collaboration discovery.
-  \item Built \textit{CollabXplorer} for scholar profiles, similarity search, and
-        collaboration recommendation; recognized as a BUPT National Innovation \&
-        Entrepreneurship Project.
+  \item Delivered scholar profiling, similarity search, and collaboration recommendation;
+        recognized as a National Innovation \& Entrepreneurship Project.
 \end{itemize}
 
 % ---------- Industrial Experience ----------
@@ -114,10 +111,14 @@
 % ---------- Projects ----------
 \section{Projects}
 \project{\href{https://github.com/harbor-framework/harbor}{Harbor}}{$\star$\,2.7k}{Core Maintainer}%
-  {Open-source framework (by the Terminal-Bench team) for evaluating and optimizing LLM
-   agents. It runs agents across third-party benchmarks, builds and shares custom
-   environments, scales experiments to thousands of parallel sandboxes, and generates
-   rollouts for reinforcement learning.}
+  {A framework (by the Terminal-Bench team) for evaluating and optimizing agents and models
+   in container environments. Built benchmark adapters (e.g., BFCL) and agent integrations
+   (Qwen Code, Kimi CLI), developed the review bot, and led adapter review and standardization.}
+\project{\href{https://github.com/huggingface/transformers}{Transformers}}{$\star$\,163k}{Contributor}%
+  {The model-definition framework for state-of-the-art machine learning models in text, vision,
+   audio, and multimodal models, for both inference and training. Contributed the TIPSv2
+   (Text-Image Pre-training with Spatial awareness) family of contrastive vision-language
+   encoders from Google DeepMind.}
 
 % ---------- Skills & Interests (commented out for now; restore when there is more) ----------
 % \section{Skills \& Interests}
