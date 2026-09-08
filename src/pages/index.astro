@@ -38,7 +38,7 @@ const news = [
     date: "2026-08",
     prefix: "Excited to join ",
     title: "Tencent",
-    link: "https://www.tencent.com/en-us/",
+    link: "https://hy.tencent.ai/",
     suffix:
       " as an intern with the Hunyuan AI Data Department, working on frontier benchmark research.",
     quoted: false,
@@ -69,8 +69,6 @@ const posts = [
     authors: ["Lin Shi", "Haowei Lin", "Zixuan Zhu", "Xiaoyue Zhou", "Xiang Li"],
     date: "2026-07",
     link: "https://harbor-index.org/",
-    dataset:
-      "https://hub.harborframework.com/datasets/harbor-index/harbor-index-1.0/latest",
   },
 ]
 ---
@@ -83,7 +81,7 @@ const posts = [
       <p class="page-kicker" data-time-greeting>Hello! I'm</p>
       <h1 id="home-title"><em data-decode="Zixuan Zhu">Zixuan Zhu</em></h1>
       <p class="home-role">Currently an intern with the <a
-          href="https://www.tencent.com/en-us/"
+          href="https://hy.tencent.ai/"
           target="_blank"
           rel="noopener noreferrer">Hunyuan AI Data Department at Tencent</a>, working on
           frontier benchmark research.</p>
@@ -244,6 +242,11 @@ const posts = [
               ) : (
                 <span>Code ({publication.data.code})</span>
               ))}
+            {publication.data.dataset && (
+              <a href={publication.data.dataset} target="_blank" rel="noopener noreferrer">
+                Dataset <span class="arrow">↗</span>
+              </a>
+            )}
           </div>
         </article>
       ))}
@@ -274,11 +277,6 @@ const posts = [
             <a href={post.link} target="_blank" rel="noopener noreferrer">
               Blog <span class="arrow">↗</span>
             </a>
-            {post.dataset && (
-              <a href={post.dataset} target="_blank" rel="noopener noreferrer">
-                Dataset <span class="arrow">↗</span>
-              </a>
-            )}
           </div>
         </article>
       ))}

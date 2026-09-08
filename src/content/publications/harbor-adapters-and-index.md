@@ -6,7 +6,7 @@ authors:
   - "Zixuan Zhu"
   - "Xiaoyue Zhou"
   - "Xiang Li"
-  - "..."
+  - "… (112 people)"
   - "Mike Merrill"
   - "Ludwig Schmidt"
   - "Alex Shaw"
@@ -15,6 +15,8 @@ year: 2026
 date: "2026-09"
 status: "Submitted to NeurIPS 2026"
 arxiv: "https://arxiv.org/abs/2609.04298"
+code: "https://github.com/harbor-framework/harbor/tree/main/adapters"
+dataset: "https://hub.harborframework.com/datasets/harbor-index/harbor-index-1.0/latest"
 selected: true
 abstract: "A unified adapter infrastructure for more than 80 agentic benchmarks, paired with large-scale model and harness evaluation and Harbor-Index, a curated 82-task meta-dataset spanning 29 benchmarks."
 ---

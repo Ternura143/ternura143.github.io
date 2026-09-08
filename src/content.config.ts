@@ -72,6 +72,7 @@ const publications = defineCollection({
     arxiv: z.string().optional(),
     pdf: z.string().optional(),
     code: z.string().optional(),
+    dataset: z.string().optional(),
     selected: z.boolean().optional(),
     abstract: z.string().optional(),
   }),
