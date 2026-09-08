@@ -8,7 +8,7 @@ import LinkedIn from "@/assets/icons/linkedin.svg"
 export const SITE = {
   title: "ternura",
   description:
-    "Zixuan Zhu, an MSc student at NTU working on large language model agents.",
+    "Zixuan Zhu, a Tencent Hunyuan AI Data Department intern working on frontier agent benchmarks.",
   locale: "en-US",
   dir: "ltr",
   defaultPageImage: "/static/opengraph-image.svg",

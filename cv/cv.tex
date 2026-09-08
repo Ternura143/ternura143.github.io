@@ -22,19 +22,19 @@
 % Section headings: uppercase, bold, with a full-width rule underneath
 \titleformat{\section}
   {\normalsize\bfseries}{}{0em}{\MakeUppercase}[{\titlerule[0.7pt]}]
-\titlespacing{\section}{0pt}{1.0ex}{0.55ex}
+\titlespacing{\section}{0pt}{0.8ex}{0.45ex}
 
-\setlist[itemize]{leftmargin=1.2em, itemsep=0.15ex, topsep=0.3ex, parsep=0pt}
+\setlist[itemize]{leftmargin=1.2em, itemsep=0.15ex, topsep=0.2ex, parsep=0pt}
 
 % Entry: {title}{date}{subtitle}{location}
 \newcommand{\cventry}[4]{%
   \textbf{#1}\hfill\textit{#2}\\[0.1ex]
-  \textit{#3}\hfill\textit{#4}\par\vspace{0.3ex}%
+  \textit{#3}\hfill\textit{#4}\par\vspace{0.2ex}%
 }
 
 % Project entry: {name (with link)}{stars}{role}{description}
 \newcommand{\project}[4]{%
-  \textbf{#1}\hspace{0.5em}{\small\color{accent}#2}\hfill\textit{#3}\\#4\par\vspace{0.3ex}%
+  \textbf{#1}\hspace{0.5em}{\small\color{accent}#2}\hfill\textit{#3}\\#4\par\vspace{0.2ex}%
 }
 
 \begin{document}
@@ -55,9 +55,9 @@
 % ---------- Research Interests ----------
 \section{Research Interests}
 \begin{itemize}
-  \item \textbf{Self-evolving agents}: how agents can continually and stably self-improve from their own experience.
-  \item \textbf{Scalable evaluation}: how to scale agent evaluation efficiently and in parallel, and keep it robust and trustworthy.
-  \item \textbf{Economics of AI}: how to reduce the token cost of agentic reasoning and get more capability from every token, until capable agents become viable on small, widely accessible models.
+  \item \textbf{Self-evolving agents}: continual and stable improvement from agent experience.
+  \item \textbf{Scalable evaluation}: efficient, parallel, robust, and trustworthy agent evaluation.
+  \item \textbf{Economics of AI}: token-efficient reasoning that makes capable agents viable on widely accessible models.
 \end{itemize}
 
 % ---------- Education ----------
@@ -73,17 +73,20 @@
 \section{Publications}
 \href{https://arxiv.org/abs/2606.02304}{Unified Context Evolution for LLM Agents}\\
 \textbf{Zixuan Zhu}, Yitong Hu, Yong Dai, Junfeng Fang, Chunyang Jiang, Senkang Hu, Yuzhi Zhao\\
-\textit{Under review} \quad arXiv:2606.02304
+\textit{EMNLP 2026 (Main Conference)} \quad arXiv:2606.02304\par
+\href{https://arxiv.org/abs/2609.04298}{Harbor Adapters and Harbor-Index: Infrastructure and a Curated Meta-Dataset for Large-Scale Agentic Evaluation}\\
+Lin Shi, Haowei Lin, \textbf{Zixuan Zhu}, Xiaoyue Zhou, Xiang Li, \ldots,
+Mike Merrill, Ludwig Schmidt, Alex Shaw\\
+\textit{Submitted to NeurIPS 2026} \quad arXiv:2609.04298
+\hfill\textit{120 authors total}
 
 % ---------- Research Experience ----------
 \section{Research Experience}
 \cventry{Harbor-Index}{Dec.\ 2025 -- Present}
   {Research Collaborator, Stanford University, advised by Prof.\ Ludwig Schmidt}{Remote}
 \begin{itemize}
-  \item Built a compact 82-task agentic benchmark distilled from 6,627 candidate tasks
-        across 54 benchmarks through difficulty filtering, automated auditing, and human review.
-  \item Led the token-analysis sub-team, studying agent failure modes and token efficiency
-        across frontier and open models.
+  \item Built Harbor-Index by curating 82 tasks from 6,627 candidates; led task audits and repairs,
+        plus token-efficiency and agent-failure analysis across frontier and open models.
 \end{itemize}
 \cventry{CollabXplorer}{Sep.\ 2021 -- May.\ 2023}
   {Research Assistant, BUPT, advised by Prof.\ Yi Wang}{Beijing, China}
@@ -94,6 +97,11 @@
 
 % ---------- Industrial Experience ----------
 \section{Industrial Experience}
+\cventry{Hunyuan AI Data Department Intern}{Aug.\ 2026 -- Present}
+  {Tencent, mentored by \href{https://slimshilin.github.io/}{Lin Shi}}{Shenzhen, China}
+\begin{itemize}
+  \item Conduct research on frontier benchmarks for AI agents.
+\end{itemize}
 \cventry{Business Intelligence \& Analysis Intern}{Jul.\ 2025 -- Oct.\ 2025}
   {SeaMoney \& MariBank}{Singapore, Singapore}
 \begin{itemize}
@@ -110,17 +118,14 @@
 
 % ---------- Projects ----------
 \section{Projects}
-\project{\href{https://github.com/harbor-framework/harbor}{Harbor}}{$\star$\,2.7k}{Core Maintainer}%
-  {A framework (by the Terminal-Bench team) for evaluating and optimizing agents and models
-   in container environments. Built benchmark adapters (e.g., BFCL) and agent integrations
-   (Qwen Code, Kimi CLI), developed the review bot, and led adapter review and standardization.}
-\project{\href{https://github.com/huggingface/transformers}{Transformers}}{$\star$\,163k}{Contributor}%
-  {The model-definition framework for state-of-the-art machine learning models in text, vision,
-   audio, and multimodal models, for both inference and training. Contributed the TIPSv2
-   (Text-Image Pre-training with Spatial awareness) family of contrastive vision-language
-   encoders from Google DeepMind.}
+\project{\href{https://github.com/harbor-framework/harbor}{Harbor}}{$\star$\,5.0k}{Core Maintainer}%
+  {Agent-evaluation framework from the Terminal-Bench team. Built benchmark adapters and agent
+   integrations, developed the review bot, and led adapter review and standardization.}
+\project{\href{https://github.com/huggingface/transformers}{Transformers}}{$\star$\,165k}{Contributor}%
+  {Contributed Google DeepMind's TIPSv2 family of contrastive vision-language encoders to the
+   Hugging Face Transformers library.}
 
-% ---------- Skills & Interests (commented out for now; restore when there is more) ----------
+% ---------- Skills & Interests (kept commented to preserve the one-page CV) ----------
 % \section{Skills \& Interests}
 % \textbf{Programming Languages:} Python, C/C++, \LaTeX, Bash, SQL, Rust, Solidity, HTML, CSS, JavaScript\\
 % \textbf{Frameworks \& Tools:} PyTorch, Transformers, Megatron-LM, VeRL, Django, Git, Spark\\

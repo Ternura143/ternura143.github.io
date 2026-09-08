@@ -1,0 +1,20 @@
+---
+title: "Harbor Adapters and Harbor-Index: Infrastructure and a Curated Meta-Dataset for Large-Scale Agentic Evaluation"
+authors:
+  - "Lin Shi"
+  - "Haowei Lin"
+  - "Zixuan Zhu"
+  - "Xiaoyue Zhou"
+  - "Xiang Li"
+  - "..."
+  - "Mike Merrill"
+  - "Ludwig Schmidt"
+  - "Alex Shaw"
+venue: "arXiv"
+year: 2026
+date: "2026-09"
+status: "Submitted to NeurIPS 2026"
+arxiv: "https://arxiv.org/abs/2609.04298"
+selected: true
+abstract: "A unified adapter infrastructure for more than 80 agentic benchmarks, paired with large-scale model and harness evaluation and Harbor-Index, a curated 82-task meta-dataset spanning 29 benchmarks."
+---

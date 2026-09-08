@@ -8,10 +8,10 @@ authors:
   - "Chunyang Jiang"
   - "Senkang Hu"
   - "Yuzhi Zhao"
-venue: "arXiv"
+venue: "EMNLP 2026"
 year: 2026
 date: "2026-06"
-status: "Under review"
+status: "Main Conference"
 arxiv: "https://arxiv.org/abs/2606.02304"
 code: "coming soon"
 selected: true

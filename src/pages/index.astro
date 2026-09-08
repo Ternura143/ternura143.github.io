@@ -26,18 +26,38 @@ const projects = (await getCollection("projects")).sort((a, b) => {
 
 const news = [
   {
+    date: "2026-09",
+    prefix: "New paper on arXiv: ",
+    title:
+      "Harbor Adapters and Harbor-Index: Infrastructure and a Curated Meta-Dataset for Large-Scale Agentic Evaluation",
+    link: "https://arxiv.org/abs/2609.04298",
+    suffix: ".",
+    quoted: true,
+  },
+  {
+    date: "2026-08",
+    prefix: "Excited to join ",
+    title: "Tencent",
+    link: "https://www.tencent.com/en-us/",
+    suffix:
+      " as an intern with the Hunyuan AI Data Department, working on frontier benchmark research.",
+    quoted: false,
+  },
+  {
+    date: "2026-08",
+    prefix: "Our paper ",
+    title: "Unified Context Evolution for LLM Agents",
+    link: "https://arxiv.org/abs/2606.02304",
+    suffix: " was accepted to the EMNLP 2026 Main Conference.",
+    quoted: true,
+  },
+  {
     date: "2026-07",
     prefix: "New blog post: ",
     title: "Introducing Harbor-Index",
     link: "https://harbor-index.org/",
     suffix: ", a compact benchmark for agentic evaluation.",
-  },
-  {
-    date: "2026-06",
-    prefix: "New paper on arXiv: ",
-    title: "Unified Context Evolution for LLM Agents",
-    link: "https://arxiv.org/abs/2606.02304",
-    suffix: ".",
+    quoted: true,
   },
 ]
 
@@ -62,13 +82,11 @@ const posts = [
     <div class="home-hero-intro">
       <p class="page-kicker" data-time-greeting>Hello! I'm</p>
       <h1 id="home-title"><em data-decode="Zixuan Zhu">Zixuan Zhu</em></h1>
-      <p class="home-role">Currently a core maintainer of <a
-          href="https://www.harborframework.com/"
+      <p class="home-role">Currently an intern with the <a
+          href="https://www.tencent.com/en-us/"
           target="_blank"
-          rel="noopener noreferrer">Harbor</a>, building agent evaluations with the <a
-          href="https://www.tbench.ai/"
-          target="_blank"
-          rel="noopener noreferrer">Terminal-Bench team</a>.</p>
+          rel="noopener noreferrer">Hunyuan AI Data Department at Tencent</a>, working on
+          frontier benchmark research.</p>
     </div>
     <div class="home-hero-aside">
       <figure class="profile-photo">
@@ -89,10 +107,22 @@ const posts = [
     </div>
     <div class="home-about">
         <p>
-          I am an MSc student at the School of Physical and Mathematical
-          Sciences, Nanyang Technological University (NTU), graduating in 2026. I
-          received my dual bachelor's degree from Beijing University of Posts and
+          I received my MSc in Financial Technology from the School of Physical and
+          Mathematical Sciences at Nanyang Technological University (NTU) in 2026,
+          after completing a dual bachelor's degree at Beijing University of Posts and
           Telecommunications (BUPT) and Queen Mary University of London (QMUL).
+        </p>
+        <p>
+          I am also a core maintainer of <a
+            href="https://www.harborframework.com/"
+            target="_blank"
+            rel="noopener noreferrer">Harbor</a
+          >, working with the <a
+            href="https://www.tbench.ai/"
+            target="_blank"
+            rel="noopener noreferrer">Terminal-Bench team</a
+          > on scalable agent evaluation. I love open source and believe in its power
+          to move research forward.
         </p>
         <p class="home-seeking">
           I am looking for PhD, RA, or research-internship opportunities, and I am open
@@ -129,7 +159,7 @@ const posts = [
             target="_blank"
             rel="noopener noreferrer">Prof. Ludwig Schmidt</a
           >, <a
-            href="https://scholar.google.com/citations?user=dLwY-1YAAAAJ"
+            href="https://slimshilin.github.io/"
             target="_blank"
             rel="noopener noreferrer">Lin Shi</a
           >, <a
@@ -161,7 +191,7 @@ const posts = [
       {news.map((item) => (
         <div class="news-item">
           <time datetime={item.date}>{fmtMonth(item.date)}</time>
-          <p>{item.prefix}"<a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}</a>"{item.suffix}</p>
+          <p>{item.prefix}{item.quoted && '"'}<a href={item.link} target="_blank" rel="noopener noreferrer">{item.title}</a>{item.quoted && '"'}{item.suffix}</p>
         </div>
       ))}
     </div>
