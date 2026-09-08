@@ -10,7 +10,7 @@ authors:
   - "Yuzhi Zhao"
 venue: "EMNLP 2026"
 year: 2026
-date: "2026-06"
+date: "2026-08"
 status: "Main Conference"
 arxiv: "https://arxiv.org/abs/2606.02304"
 code: "coming soon"

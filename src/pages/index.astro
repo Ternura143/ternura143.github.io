@@ -208,8 +208,8 @@ const posts = [
         <article class="ink-entry" id={publication.id}>
           <h2>{publication.data.title}</h2>
           <div class="entry-meta">
-            <span class="tag">{publication.data.venue}</span>
             <span>{publication.data.date ? fmtMonth(publication.data.date) : publication.data.year}</span>
+            <span class="tag">{publication.data.venue}</span>
             {publication.data.status && <span>{publication.data.status}</span>}
             <span>
               {publication.data.authors.map((author, index) => (
