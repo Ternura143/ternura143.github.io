@@ -9,9 +9,10 @@ authors:
   - "… (113 people)"
   - "Ludwig Schmidt"
   - "Alex Shaw"
-venue: "arXiv"
+venue: "NeurIPS 2026"
 year: 2026
 date: "2026-09"
+status: "Evaluations and Datasets Track"
 arxiv: "https://arxiv.org/abs/2609.04298"
 code: "https://github.com/harbor-framework/harbor/tree/main/adapters"
 dataset: "https://hub.harborframework.com/datasets/harbor-index/harbor-index-1.0/latest"
